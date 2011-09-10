@@ -8,7 +8,7 @@ timeoutSet = (x, y) -> setTimeout y, x
 
 
 getLatestPath = () ->
-  dir = "/Users/a/Desktop"#TEMP
+  dir = "/Users/#{process.env.USER}/Desktop"#TEMP
   filenames = []
   for filename in fs.readdirSync dir
     if filename.match /^MediaClient_[0-9]+.mov$/
