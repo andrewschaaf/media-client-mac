@@ -13,6 +13,19 @@
     return self;
 }
 
+
+- (IBAction)start:(id)sender
+{
+    
+}
+
+- (IBAction)stop:(id)sender
+{
+    
+}
+
+#pragma mark Document Stuff
+
 - (NSString *)windowNibName
 {
     // Override returning the nib file name of the document
