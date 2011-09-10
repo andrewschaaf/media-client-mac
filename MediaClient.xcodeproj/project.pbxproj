@@ -14,6 +14,8 @@
 		00340996141BEB3C000AA327 /* ItemDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 00340995141BEB3C000AA327 /* ItemDocument.m */; };
 		00340999141BEB3C000AA327 /* ItemDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00340997141BEB3C000AA327 /* ItemDocument.xib */; };
 		0034099C141BEB3C000AA327 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0034099A141BEB3C000AA327 /* MainMenu.xib */; };
+		00713E60141BEC1100C89F06 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00713E5F141BEC1100C89F06 /* CoreMedia.framework */; };
+		00713E63141BEC1600C89F06 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00713E62141BEC1600C89F06 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		00340995141BEB3C000AA327 /* ItemDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemDocument.m; sourceTree = "<group>"; };
 		00340998141BEB3C000AA327 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ItemDocument.xib; sourceTree = "<group>"; };
 		0034099B141BEB3C000AA327 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		00713E5F141BEC1100C89F06 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		00713E62141BEC1600C89F06 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +42,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00713E60141BEC1100C89F06 /* CoreMedia.framework in Frameworks */,
+				00713E63141BEC1600C89F06 /* AVFoundation.framework in Frameworks */,
 				00340983141BEB3C000AA327 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,6 +54,8 @@
 		00340973141BEB3B000AA327 = {
 			isa = PBXGroup;
 			children = (
+				00713E62141BEC1600C89F06 /* AVFoundation.framework */,
+				00713E5F141BEC1100C89F06 /* CoreMedia.framework */,
 				00340988141BEB3C000AA327 /* MediaClient */,
 				00340981141BEB3C000AA327 /* Frameworks */,
 				0034097F141BEB3C000AA327 /* Products */,
@@ -295,6 +303,7 @@
 				003409A1141BEB3C000AA327 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
