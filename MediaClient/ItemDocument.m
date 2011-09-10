@@ -1,27 +1,127 @@
 
 #import "ItemDocument.h"
 
+#import <AVFoundation/AVFoundation.h>
+
 @implementation ItemDocument
 
-- (id)init
+@synthesize captureSession = captureSession, captureScreenInput = captureScreenInput;
+
+
+- (id)initWithType:(NSString *)typeName error:(NSError **)outError
 {
-    self = [super init];
-    if (self) {
-        // Add your subclass-specific initialization here.
-        // If an error occurs here, send a [self release] message and return nil.
+    self = [super initWithType:typeName error:outError];
+    
+    if (self) 
+    {        
+        BOOL success = [self createCaptureSession:outError];
+        if (!success) 
+        {
+            [self release];
+            return nil;
+        }
     }
+    
     return self;
 }
 
+- (void)dealloc
+{
+    [captureSession release];
+    [captureScreenInput release];
+    [captureMovieFileOutput release];
+    [super dealloc];
+}
 
 - (IBAction)start:(id)sender
 {
-    
+    NSString *desktop = [@"~/Desktop" stringByStandardizingPath];
+    long long ms = (long long)([[NSDate date] timeIntervalSince1970] * 1000);
+    NSString *path = [NSString stringWithFormat:@"%@/MediaClient_%lld.mov", desktop, ms];
+    [captureMovieFileOutput
+            startRecordingToOutputFileURL:[NSURL fileURLWithPath:path]
+                        recordingDelegate:self];
 }
 
 - (IBAction)stop:(id)sender
 {
+    [captureMovieFileOutput stopRecording];
+}
+
+#pragma mark Capture
+
+- (BOOL)createCaptureSession:(NSError **)outError
+{
+    captureSession = [[AVCaptureSession alloc] init];
+	if ( ! [captureSession canSetSessionPreset:AVCaptureSessionPresetHigh]) {
+        return NO;
+    }
+    [captureSession setSessionPreset:AVCaptureSessionPresetHigh];
     
+    display = CGMainDisplayID();
+    
+    captureScreenInput = [[AVCaptureScreenInput alloc] initWithDisplayID:display];
+    if ( ! [captureSession canAddInput:captureScreenInput]) {
+        return NO;
+    }
+    [captureSession addInput:captureScreenInput];
+    
+    captureMovieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+    [captureMovieFileOutput setDelegate:self];
+    if ( ! [captureSession canAddOutput:captureMovieFileOutput]) {
+        return NO;
+    }
+    [captureSession addOutput:captureMovieFileOutput];
+    
+    return YES;
+}
+
+- (void)addCaptureVideoPreview
+{
+	AVCaptureVideoPreviewLayer *videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:captureSession];
+	[videoPreviewLayer setFrame:[[captureView layer] bounds]];
+	[videoPreviewLayer setAutoresizingMask:kCALayerWidthSizable|kCALayerHeightSizable];
+    [[captureView layer] addSublayer:videoPreviewLayer];
+	[[captureView layer] setBackgroundColor:CGColorGetConstantColor(kCGColorBlack)];
+    [videoPreviewLayer release];
+}
+
+- (float)maximumScreenInputFramerate
+{
+	return 30.0;
+}
+
+- (void)setMaximumScreenInputFramerate:(float)maximumFramerate
+{
+	CMTime minimumFrameDuration = CMTimeMake(1, (int32_t)maximumFramerate);
+	[captureScreenInput setMinFrameDuration:minimumFrameDuration];
+}
+
+- (void)addDisplayInputToCaptureSession:(CGDirectDisplayID)newDisplay cropRect:(CGRect)cropRect
+{
+    [captureSession beginConfiguration];
+    if (newDisplay != display) {
+        [captureSession removeInput:captureScreenInput];
+        AVCaptureScreenInput *newScreenInput = [[AVCaptureScreenInput alloc] initWithDisplayID:newDisplay];
+        [captureScreenInput release];
+        captureScreenInput = newScreenInput;
+        if ([captureSession canAddInput:captureScreenInput]) {
+            [captureSession addInput:captureScreenInput];
+        }
+        [self setMaximumScreenInputFramerate:[self maximumScreenInputFramerate]];
+    }
+    [captureScreenInput setCropRect:cropRect];
+    [captureSession commitConfiguration];
+}
+
+- (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error
+{
+    if (error) {
+        [self presentError:error];
+		return;
+    }
+    
+    [[NSWorkspace sharedWorkspace] openURL:outputFileURL];
 }
 
 #pragma mark Document Stuff
@@ -36,7 +136,19 @@
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
     [super windowControllerDidLoadNib:aController];
-    // Add any code here that needs to be executed once the windowController has loaded the document's window.
+    [self addCaptureVideoPreview];
+    [captureSession startRunning];
+}
+
+- (void)close
+{
+    [captureSession stopRunning];
+    [super close];
+}
+
+-(BOOL)isDocumentEdited
+{
+    return NO;
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
