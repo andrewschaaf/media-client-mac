@@ -16,6 +16,7 @@
 		0034099C141BEB3C000AA327 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0034099A141BEB3C000AA327 /* MainMenu.xib */; };
 		00713E60141BEC1100C89F06 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00713E5F141BEC1100C89F06 /* CoreMedia.framework */; };
 		00713E63141BEC1600C89F06 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00713E62141BEC1600C89F06 /* AVFoundation.framework */; };
+		00713E78141C0A0F00C89F06 /* upload.coffee in Resources */ = {isa = PBXBuildFile; fileRef = 00713E77141C0A0F00C89F06 /* upload.coffee */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		0034099B141BEB3C000AA327 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		00713E5F141BEC1100C89F06 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		00713E62141BEC1600C89F06 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		00713E77141C0A0F00C89F06 /* upload.coffee */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = upload.coffee; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 		00340989141BEB3C000AA327 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				00713E77141C0A0F00C89F06 /* upload.coffee */,
 				0034098A141BEB3C000AA327 /* MediaClient-Info.plist */,
 				0034098B141BEB3C000AA327 /* InfoPlist.strings */,
 				0034098E141BEB3C000AA327 /* main.m */,
@@ -164,6 +167,7 @@
 				00340993141BEB3C000AA327 /* Credits.rtf in Resources */,
 				00340999141BEB3C000AA327 /* ItemDocument.xib in Resources */,
 				0034099C141BEB3C000AA327 /* MainMenu.xib in Resources */,
+				00713E78141C0A0F00C89F06 /* upload.coffee in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

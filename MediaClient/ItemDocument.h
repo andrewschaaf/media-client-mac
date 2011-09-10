@@ -7,10 +7,13 @@
 @interface ItemDocument : NSDocument <AVCaptureFileOutputDelegate,AVCaptureFileOutputRecordingDelegate> {
     IBOutlet NSView *captureView;
 @private
+    
     CGDirectDisplayID           display;
     AVCaptureSession            *captureSession;
     AVCaptureScreenInput        *captureScreenInput;
     AVCaptureMovieFileOutput    *captureMovieFileOutput;
+    
+    NSTask                      *uploadTask;
 }
 
 @property (retain) AVCaptureSession *captureSession;

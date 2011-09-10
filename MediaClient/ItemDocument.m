@@ -114,15 +114,42 @@
     [captureSession commitConfiguration];
 }
 
-- (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error
+// (when the output has started writing to the file)
+- (void)captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections
+{
+    uploadTask = [[NSTask alloc] init];
+    [uploadTask setLaunchPath:@"/usr/local/bin/coffee"];
+    [uploadTask setEnvironment:[NSDictionary dictionaryWithObjectsAndKeys:
+                                    NSUserName(),                       @"USER",
+                                    @"/usr/local/bin:/usr/bin:/bin",    @"PATH",
+                                    nil]];
+    [uploadTask setArguments:[NSArray arrayWithObjects:
+                                    [[NSBundle mainBundle] pathForResource:@"upload" ofType:@"coffee"],
+                                    [fileURL path],
+                                    nil]];
+    [uploadTask launch];
+}
+
+// (when all pending data has been written)
+- (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections error:(NSError *)error
 {
     if (error) {
         [self presentError:error];
 		return;
     }
     
-    [[NSWorkspace sharedWorkspace] openURL:outputFileURL];
+    [uploadTask terminate];
 }
+
+/*
+
+ – captureOutput:didStartRecordingToOutputFileAtURL:fromConnections:
+ – captureOutput:willFinishRecordingToOutputFileAtURL:fromConnections:error:
+ – captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error:
+ – captureOutput:didPauseRecordingToOutputFileAtURL:fromConnections:
+ – captureOutput:didResumeRecordingToOutputFileAtURL:fromConnections:
+ 
+*/
 
 #pragma mark Document Stuff
 
