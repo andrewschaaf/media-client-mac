@@ -54,8 +54,6 @@
 		00340973141BEB3B000AA327 = {
 			isa = PBXGroup;
 			children = (
-				00713E62141BEC1600C89F06 /* AVFoundation.framework */,
-				00713E5F141BEC1100C89F06 /* CoreMedia.framework */,
 				00340988141BEB3C000AA327 /* MediaClient */,
 				00340981141BEB3C000AA327 /* Frameworks */,
 				0034097F141BEB3C000AA327 /* Products */,
@@ -74,6 +72,8 @@
 			isa = PBXGroup;
 			children = (
 				00340982141BEB3C000AA327 /* Cocoa.framework */,
+				00713E62141BEC1600C89F06 /* AVFoundation.framework */,
+				00713E5F141BEC1100C89F06 /* CoreMedia.framework */,
 				00340984141BEB3C000AA327 /* Other Frameworks */,
 			);
 			name = Frameworks;
