@@ -17,6 +17,7 @@
 		00713E60141BEC1100C89F06 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00713E5F141BEC1100C89F06 /* CoreMedia.framework */; };
 		00713E63141BEC1600C89F06 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00713E62141BEC1600C89F06 /* AVFoundation.framework */; };
 		00713E78141C0A0F00C89F06 /* upload.coffee in Resources */ = {isa = PBXBuildFile; fileRef = 00713E77141C0A0F00C89F06 /* upload.coffee */; };
+		0078D7D9141C248B0024FB3A /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0078D7D8141C248B0024FB3A /* CoreVideo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		00713E5F141BEC1100C89F06 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		00713E62141BEC1600C89F06 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		00713E77141C0A0F00C89F06 /* upload.coffee */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = upload.coffee; sourceTree = SOURCE_ROOT; };
+		0078D7D8141C248B0024FB3A /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0078D7D9141C248B0024FB3A /* CoreVideo.framework in Frameworks */,
 				00713E60141BEC1100C89F06 /* CoreMedia.framework in Frameworks */,
 				00713E63141BEC1600C89F06 /* AVFoundation.framework in Frameworks */,
 				00340983141BEB3C000AA327 /* Cocoa.framework in Frameworks */,
@@ -56,6 +59,7 @@
 		00340973141BEB3B000AA327 = {
 			isa = PBXGroup;
 			children = (
+				0078D7D8141C248B0024FB3A /* CoreVideo.framework */,
 				00340988141BEB3C000AA327 /* MediaClient */,
 				00340981141BEB3C000AA327 /* Frameworks */,
 				0034097F141BEB3C000AA327 /* Products */,

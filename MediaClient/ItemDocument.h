@@ -4,16 +4,21 @@
 
 @class AVCaptureSession, AVCaptureScreenInput, AVCaptureMovieFileOutput;
 
-@interface ItemDocument : NSDocument <AVCaptureFileOutputDelegate,AVCaptureFileOutputRecordingDelegate> {
+@interface ItemDocument : NSDocument <AVCaptureVideoDataOutputSampleBufferDelegate> {
     IBOutlet NSView *captureView;
 @private
     
     CGDirectDisplayID           display;
     AVCaptureSession            *captureSession;
     AVCaptureScreenInput        *captureScreenInput;
-    AVCaptureMovieFileOutput    *captureMovieFileOutput;
+    AVCaptureVideoDataOutput    *captureVideoDataOutput;
     
-    NSTask                      *uploadTask;
+    NSTimeInterval initializedAt;
+    double numFramesCaptured;
+    double numFramesDropped;
+    
+    NSTask *task;
+    NSFileHandle *taskStdin;
 }
 
 @property (retain) AVCaptureSession *captureSession;
@@ -28,6 +33,5 @@
 - (float)maximumScreenInputFramerate;
 - (void)setMaximumScreenInputFramerate:(float)maximumFramerate;
 - (void)addDisplayInputToCaptureSession:(CGDirectDisplayID)newDisplay cropRect:(CGRect)cropRect;
-- (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error;
 
 @end
